@@ -10,6 +10,20 @@ services:
     environment:
       - OLLAMA_BASE_URL=http://172.16.239.11:11434
     restart: always
+    networks:
+      ollamanet:
+        ipv4_address: 172.16.239.10
+  ollama:
+    container_name: ollama
+    image: ollama/ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama:/root/.ollama
+    restart: always
+    networks:
+      ollamanet:
+        ipv4_address: 172.16.239.11
 
 volumes:
   open-webui:
