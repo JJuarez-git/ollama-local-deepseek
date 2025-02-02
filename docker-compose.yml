@@ -1,0 +1,24 @@
+version: '3'
+services:
+  openwebui:
+    container_name: open-webui
+    image: ghcr.io/open-webui/open-webui:main
+    ports:
+      - "3000:8080"
+    volumes:
+      - open-webui:/app/backend/data
+    environment:
+      - OLLAMA_BASE_URL=http://172.16.239.11:11434
+    restart: always
+
+volumes:
+  open-webui:
+  ollama:
+
+networks:
+  ollamanet:
+    name: ollama-net
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.16.239.0/24
